@@ -19,7 +19,5 @@ hide_spinner();
     }
         
 $(document).ready(function () {
-
-init_stock_lookup();
-
+    init_stock_lookup();
 })
