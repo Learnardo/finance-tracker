@@ -24,6 +24,7 @@ class UserStocksController < ApplicationController
   # POST /user_stocks
   # POST /user_stocks.json
   def create
+     
     if params[:stock_id].present?
         @user_stock = UserStock.new(stock_id: params[:stock_id], user: current_user)
     else
@@ -42,7 +43,7 @@ class UserStocksController < ApplicationController
     end
       respond_to do |format|
           if @user_stock.save
-              format.html { redirect_to my_portfolio_path, notice: "You are now tracking #{@user_stock.stock.ticker}" }
+              format.html { redirect_to my_portfolio_path, notice: "You are now tracking #{@user_stock.stock.name}" }
               format.json { render :show, status: :created, location: @user_stock }
           else
               format.html { render :new }
@@ -70,7 +71,7 @@ end
   def destroy
     @user_stock.destroy
     respond_to do |format|
-      format.html { redirect_to user_stocks_url, notice: 'User stock was successfully destroyed.' }
+        format.html { redirect_to my_portfolio_path, notice: 'Stock was successfully removed from portfolio.'}
       format.json { head :no_content }
     end
   end
